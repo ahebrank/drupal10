@@ -24,6 +24,10 @@ function _platformsh_drush_site_url() {
   }
 
   $routes = $platformsh->getUpstreamRoutes($platformsh->applicationName);
+  if (empty($routes)) {
+    echo "No upstream routes found.\n";
+    return NULL;
+  }
 
   // Sort URLs, with the primary route first, then by HTTPS before HTTP, then by length.
   usort($routes, function (array $a, array $b) {
